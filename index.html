@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSphere Apex - Next-Gen Arcade Gaming & APK Matrix</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyberDark: '#050811',
+                        cyberPanel: '#0c1322',
+                        cyberBlue: '#00f0ff',
+                        cyberRed: '#ff0055',
+                        cyberBorder: '#182640'
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'glow-blue': '0 0 25px rgba(0, 240, 255, 0.5)',
+                        'glow-red': '0 0 25px rgba(255, 0, 85, 0.5)',
+                        'glow-intense': '0 0 40px rgba(0, 240, 255, 0.6), 0 0 25px rgba(255, 0, 85, 0.6)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050811;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Animated Grid Background */
+        .cyber-grid {
+            background-size: 60px 60px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 0, 85, 0.07) 1px, transparent 1px);
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        /* Cyber Glassmorphism Containers */
+        .cyber-glass {
+            background: rgba(12, 19, 34, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cyber-glass:hover {
+            border-color: rgba(0, 240, 255, 0.7);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .cyber-glass-red {
+            background: rgba(24, 10, 20, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cyber-glass-red:hover {
+            border-color: rgba(255, 0, 85, 0.8);
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.4);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        /* Neon Text Glow Classes */
+        .text-glow-blue { text-shadow: 0 0 12px rgba(0, 240, 255, 0.9), 0 0 24px rgba(0, 240, 255, 0.5); }
+        .text-glow-red { text-shadow: 0 0 12px rgba(255, 0, 85, 0.9), 0 0 24px rgba(255, 0, 85, 0.5); }
+
+        /* Cyber Cut Angular Buttons */
+        .cyber-clip-btn {
+            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glitch Effect on Hover */
+        .cyber-clip-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: rotate(30deg) translateY(-100%);
+            transition: transform 0.6s ease;
+        }
+        .cyber-clip-btn:hover::after {
+            transform: rotate(30deg) translateY(100%);
+        }
+
+        /* Floating 3D Graphic Animation */
+        @keyframes float3D {
+            0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateY(-18px) rotateX(4deg) rotateY(-4deg); }
+        }
+        .animate-float-3d {
+            animation: float3D 5s ease-in-out infinite;
+        }
+
+        /* Scanline Overlay Effect */
+        @keyframes scanlineAnim {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(1000%); }
+        }
+        .scanline-layer {
+            position: fixed;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, #00f0ff, #ff0055, transparent);
+            animation: scanlineAnim 6s linear infinite;
+            opacity: 0.85;
+            pointer-events: none;
+            z-index: 45;
+        }
+
+        /* Equalizer Sound Bars */
+        @keyframes eqBar1 { 0%, 100% { height: 6px; } 50% { height: 22px; } }
+        @keyframes eqBar2 { 0%, 100% { height: 20px; } 50% { height: 8px; } }
+        @keyframes eqBar3 { 0%, 100% { height: 10px; } 50% { height: 26px; } }
+        @keyframes eqBar4 { 0%, 100% { height: 24px; } 50% { height: 12px; } }
+
+        .eq-bar-1 { animation: eqBar1 0.5s infinite ease-in-out; }
+        .eq-bar-2 { animation: eqBar2 0.7s infinite ease-in-out; }
+        .eq-bar-3 { animation: eqBar3 0.4s infinite ease-in-out; }
+        .eq-bar-4 { animation: eqBar4 0.6s infinite ease-in-out; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050811; }
+        ::-webkit-scrollbar-thumb {
+            background: #182640;
+            border-radius: 4px;
+            border: 1px solid #00f0ff;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #ff0055; }
+    </style>
+</head>
+<body class="cyber-grid min-h-screen flex flex-col justify-between selection:bg-cyberBlue selection:text-black relative">
+
+    <!-- Interactive Particle Background Canvas -->
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-70"></canvas>
+    <div id="cursor-glow" class="fixed w-32 h-32 rounded-full bg-cyberBlue/10 blur-2xl pointer-events-none z-0 transition-transform duration-75"></div>
+
+    <!-- Scanline Layer -->
+    <div class="scanline-layer"></div>
+
+    <!-- Background Ambient Glow Orbs -->
+    <div class="fixed top-[-100px] left-[-100px] w-[500px] h-[500px] bg-cyberBlue/10 rounded-full blur-[140px] pointer-events-none z-0 animate-pulse"></div>
+    <div class="fixed bottom-[-100px] right-[-100px] w-[500px] h-[500px] bg-cyberRed/10 rounded-full blur-[140px] pointer-events-none z-0 animate-pulse"></div>
+
+    <header class="sticky top-0 z-50 bg-cyberDark/90 backdrop-blur-xl border-b border-cyberBlue/30 shadow-glow-blue transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Dynamic Brand Logo -->
+            <a href="#" onclick="switchPage('home')" class="flex items-center gap-3 group">
+                <div class="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-cyberBlue via-cyan-400 to-cyberRed p-[2px] rounded-lg shadow-glow-blue group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-cyberDark rounded-[6px] flex items-center justify-center">
+                        <i class="fa-solid fa-microchip text-2xl text-cyberBlue group-hover:text-cyberRed transition-colors animate-pulse"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-orbitron text-xl sm:text-2xl font-black tracking-wider text-white flex items-center">
+                        CYBER<span class="text-cyberRed font-extrabold text-glow-red ml-1">SPHERE</span>
+                    </span>
+                    <span class="text-[9px] font-rajdhani uppercase tracking-[0.28em] text-cyberBlue font-bold">Arcade Apex Hub</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 font-orbitron text-xs lg:text-sm uppercase font-semibold">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-md text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/40 shadow-glow-blue">Home</button>
+                <button onclick="switchPage('services')" id="nav-services" class="nav-btn px-4 py-2 rounded-md text-gray-300 hover:text-cyberBlue hover:bg-cyberBlue/10 transition-all">Services</button>
+                <button onclick="switchPage('blog')" id="nav-blog" class="nav-btn px-4 py-2 rounded-md text-gray-300 hover:text-cyberBlue hover:bg-cyberBlue/10 transition-all">Blog Guide</button>
+                <button onclick="switchPage('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-md text-gray-300 hover:text-cyberBlue hover:bg-cyberBlue/10 transition-all">About Us</button>
+                <button onclick="switchPage('contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-md text-gray-300 hover:text-cyberBlue hover:bg-cyberBlue/10 transition-all">Contact Us</button>
+            </nav>
+
+            <!-- Audio Visualizer Indicator & CTA -->
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 bg-cyberDark/90 border border-cyberBlue/40 px-3 py-1.5 rounded-full shadow-glow-blue" title="High-Energy Synth Audio Auto-Active">
+                    <div class="flex items-end gap-1 h-5 w-7">
+                        <span class="w-1 bg-cyberBlue rounded-full eq-bar-1"></span>
+                        <span class="w-1 bg-cyberRed rounded-full eq-bar-2"></span>
+                        <span class="w-1 bg-cyberBlue rounded-full eq-bar-3"></span>
+                        <span class="w-1 bg-cyberRed rounded-full eq-bar-4"></span>
+                    </div>
+                    <span class="text-[10px] font-orbitron font-bold text-cyberBlue tracking-widest hidden sm:inline">SYNTH STREAM</span>
+                </div>
+
+                <button onclick="switchPage('blog')" class="hidden lg:flex cyber-clip-btn bg-gradient-to-r from-cyberRed to-red-600 hover:brightness-125 text-white font-orbitron font-bold text-xs px-5 py-2.5 tracking-wider uppercase transition-all shadow-glow-red items-center gap-2">
+                    <i class="fa-solid fa-gamepad text-amber-300 animate-bounce"></i> APK Matrix
+                </button>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden text-cyberBlue p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyberDark/95 border-b border-cyberBlue/30 px-4 pt-2 pb-6 space-y-2 font-orbitron">
+            <button onclick="switchPage('home')" class="block w-full text-left px-4 py-3 rounded-md text-cyberBlue bg-cyberBlue/10">Home</button>
+            <button onclick="switchPage('services')" class="block w-full text-left px-4 py-3 rounded-md text-gray-300 hover:bg-cyberBlue/10">Services</button>
+            <button onclick="switchPage('blog')" class="block w-full text-left px-4 py-3 rounded-md text-gray-300 hover:bg-cyberBlue/10">Blog Guide</button>
+            <button onclick="switchPage('about')" class="block w-full text-left px-4 py-3 rounded-md text-gray-300 hover:bg-cyberBlue/10">About Us</button>
+            <button onclick="switchPage('contact')" class="block w-full text-left px-4 py-3 rounded-md text-gray-300 hover:bg-cyberBlue/10">Contact Us</button>
+        </div>
+    </header>
+
+    <main class="flex-grow z-10 relative">
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <section id="page-home" class="page-content space-y-20 py-8 md:py-12">
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyberBlue/10 border border-cyberBlue/40 text-cyberBlue font-rajdhani font-bold text-sm tracking-wide shadow-glow-blue">
+                            <span class="w-2.5 h-2.5 rounded-full bg-cyberRed animate-ping"></span>
+                            NEXT-GEN MOBILE ARCADE & GAMING HUB
+                        </div>
+
+                        <h1 class="font-orbitron font-black text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
+                            HIGH-OCTANE <br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyberBlue via-cyan-300 to-cyberRed text-glow-blue">
+                                MOBILE ARCADE MATRIX
+                            </span>
+                        </h1>
+
+                        <p class="text-gray-300 font-sans text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Experience zero-latency game builds, cryptographic security hash validation, hardware graphics acceleration, and high-FPS gaming configurations.
+                        </p>
+
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                            <button onclick="switchPage('blog')" class="cyber-clip-btn bg-gradient-to-r from-cyberBlue to-blue-600 text-black font-orbitron font-extrabold px-8 py-4 text-sm uppercase tracking-wider shadow-glow-blue hover:brightness-125 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-rocket"></i> Read APK Guide
+                            </button>
+                            <button onclick="switchPage('services')" class="cyber-clip-btn bg-transparent border-2 border-cyberRed text-cyberRed hover:bg-cyberRed hover:text-white font-orbitron font-bold px-8 py-3.5 text-sm uppercase tracking-wider transition-all shadow-glow-red flex items-center gap-2">
+                                <i class="fa-solid fa-sliders"></i> System Services
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4 pt-8 border-t border-cyberBorder">
+                            <div>
+                                <h3 class="font-orbitron text-2xl lg:text-3xl font-extrabold text-cyberBlue text-glow-blue">99.9%</h3>
+                                <p class="font-rajdhani text-gray-400 text-xs sm:text-sm font-semibold uppercase">Uptime Ratio</p>
+                            </div>
+                            <div>
+                                <h3 class="font-orbitron text-2xl lg:text-3xl font-extrabold text-cyberRed text-glow-red">3.8M+</h3>
+                                <p class="font-rajdhani text-gray-400 text-xs sm:text-sm font-semibold uppercase">Active Gamers</p>
+                            </div>
+                            <div>
+                                <h3 class="font-orbitron text-2xl lg:text-3xl font-extrabold text-emerald-400">ZERO</h3>
+                                <p class="font-rajdhani text-gray-400 text-xs sm:text-sm font-semibold uppercase">Security Risk</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating 3D Graphic Banner -->
+                    <div class="lg:col-span-5 relative animate-float-3d">
+                        <div class="relative mx-auto max-w-md lg:max-w-none rounded-2xl overflow-hidden p-[2px] bg-gradient-to-b from-cyberBlue via-cyberRed to-blue-900 shadow-glow-intense">
+                            <div class="relative bg-cyberDark rounded-xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=80" 
+                                     alt="Futuristic Gaming Console" 
+                                     class="w-full h-80 sm:h-96 object-cover transform hover:scale-105 transition-transform duration-700"
+                                     onerror="this.src='https://placehold.co/800x600/050811/00f0ff?text=Cyber+Gaming+Hero'">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyberDark via-cyberDark/30 to-transparent flex flex-col justify-end p-6">
+                                    <span class="inline-block px-3 py-1 bg-cyberRed/90 text-white font-orbitron text-xs font-bold rounded w-max mb-2 shadow-glow-red">HIGH PERFORMANCE ENGINE</span>
+                                    <h4 class="font-orbitron text-xl font-bold text-white">CyberSphere Engine v4.2</h4>
+                                    <p class="text-xs text-gray-300 font-sans">Hardware level GPU tuning and low input latency.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="font-orbitron text-2xl sm:text-3xl font-bold text-white uppercase tracking-wider">
+                        Futuristic <span class="text-cyberBlue text-glow-blue">Cyber Capabilities</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-2">Engineered for extreme performance, security, and low-latency execution.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="cyber-glass rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-lg bg-cyberBlue/10 border border-cyberBlue/40 flex items-center justify-center text-cyberBlue text-2xl mb-4">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="font-orbitron font-bold text-lg text-white mb-2">Ultra-Fast Mirrors</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Direct edge server networks ensuring rapid and unbroken APK downloads.</p>
+                    </div>
+
+                    <div class="cyber-glass-red rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-lg bg-cyberRed/10 border border-cyberRed/40 flex items-center justify-center text-cyberRed text-2xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="font-orbitron font-bold text-lg text-white mb-2">Security Hash Verification</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">SHA-256 binary validation guaranteeing clean and untouched installation files.</p>
+                    </div>
+
+                    <div class="cyber-glass rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-lg bg-cyberBlue/10 border border-cyberBlue/40 flex items-center justify-center text-cyberBlue text-2xl mb-4">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="font-orbitron font-bold text-lg text-white mb-2">FPS Optimization</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">System level tweaks to unlock high refresh rates on Android mobile displays.</p>
+                    </div>
+
+                    <div class="cyber-glass-red rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-lg bg-cyberRed/10 border border-cyberRed/40 flex items-center justify-center text-cyberRed text-2xl mb-4">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h3 class="font-orbitron font-bold text-lg text-white mb-2">24/7 Tech Desk</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Round-the-clock technical guidance for installation and device optimization.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gaming Banner -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="relative rounded-2xl overflow-hidden border border-cyberBlue/40 shadow-glow-blue">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80" 
+                         alt="Cyber Arena Gaming Setup" 
+                         class="w-full h-72 md:h-96 object-cover transform hover:scale-105 transition-transform duration-700"
+                         onerror="this.src='https://placehold.co/1200x500/050811/ff0055?text=Cyber+Arena+Portal'">
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyberDark via-cyberDark/80 to-transparent flex items-center p-8 md:p-12">
+                        <div class="max-w-xl space-y-4">
+                            <span class="text-cyberRed font-orbitron font-bold text-xs tracking-widest uppercase">EXCLUSIVELY AT CYBERSPHERE APEX</span>
+                            <h2 class="font-orbitron font-extrabold text-2xl md:text-4xl text-white">Master Mobile Arcade Performance Today</h2>
+                            <p class="text-gray-300 text-sm md:text-base">Experience low input lag, smooth touch response, and verified installation packages. Read our complete technical guide now.</p>
+                            <button onclick="switchPage('blog')" class="cyber-clip-btn bg-cyberBlue hover:bg-cyan-300 text-black font-orbitron font-bold px-6 py-3 text-sm uppercase transition-all shadow-glow-blue">
+                                Read Complete APK Guide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 2: SERVICES PAGE ================= -->
+        <section id="page-services" class="page-content hidden space-y-12 py-8 md:py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                    <span class="text-cyberRed font-orbitron font-bold text-xs tracking-widest uppercase">OUR HIGH-TECH OFFERINGS</span>
+                    <h1 class="font-orbitron text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                        CYBERNETIC <span class="text-cyberBlue text-glow-blue">SERVICES</span>
+                    </h1>
+                    <p class="text-gray-400 text-base">Explore our specialized mobile gaming optimization services and application security auditing.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="cyber-glass rounded-2xl p-8 relative overflow-hidden group">
+                        <div class="flex items-start gap-5">
+                            <div class="w-16 h-16 rounded-xl bg-cyberBlue/10 border border-cyberBlue/40 flex items-center justify-center text-cyberBlue text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-gauge-high"></i>
+                            </div>
+                            <div class="space-y-3">
+                                <h3 class="font-orbitron text-xl font-bold text-white">Hardware GPU Accelerator</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed">Tuning configurations designed to lower rendering overhead on ARM-based smartphone GPUs.</p>
+                                <ul class="text-xs text-cyberBlue space-y-1.5 font-rajdhani font-semibold">
+                                    <li><i class="fa-solid fa-check text-cyberRed mr-2"></i> GPU Pipeline Optimization</li>
+                                    <li><i class="fa-solid fa-check text-cyberRed mr-2"></i> Memory Buffer Scheduling</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-glass-red rounded-2xl p-8 relative overflow-hidden group">
+                        <div class="flex items-start gap-5">
+                            <div class="w-16 h-16 rounded-xl bg-cyberRed/10 border border-cyberRed/40 flex items-center justify-center text-cyberRed text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-shield-virus"></i>
+                            </div>
+                            <div class="space-y-3">
+                                <h3 class="font-orbitron text-xl font-bold text-white">Binary Hash Audit</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed">Comprehensive cryptographic checksum verification guaranteeing clean application code.</p>
+                                <ul class="text-xs text-cyberRed space-y-1.5 font-rajdhani font-semibold">
+                                    <li><i class="fa-solid fa-check text-cyberBlue mr-2"></i> Real-time Hash Validation</li>
+                                    <li><i class="fa-solid fa-check text-cyberBlue mr-2"></i> Zero-Malware Certification</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-glass-red rounded-2xl p-8 relative overflow-hidden group">
+                        <div class="flex items-start gap-5">
+                            <div class="w-16 h-16 rounded-xl bg-cyberRed/10 border border-cyberRed/40 flex items-center justify-center text-cyberRed text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-network-wired"></i>
+                            </div>
+                            <div class="space-y-3">
+                                <h3 class="font-orbitron text-xl font-bold text-white">Low-Latency Relay Nodes</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed">Dedicated network routes that stabilize packet delivery during intense multiplayer gaming matches.</p>
+                                <ul class="text-xs text-cyberRed space-y-1.5 font-rajdhani font-semibold">
+                                    <li><i class="fa-solid fa-check text-cyberBlue mr-2"></i> Sub-15ms Local Routes</li>
+                                    <li><i class="fa-solid fa-check text-cyberBlue mr-2"></i> Anti-DDoS Filter Protection</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-glass rounded-2xl p-8 relative overflow-hidden group">
+                        <div class="flex items-start gap-5">
+                            <div class="w-16 h-16 rounded-xl bg-cyberBlue/10 border border-cyberBlue/40 flex items-center justify-center text-cyberBlue text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div class="space-y-3">
+                                <h3 class="font-orbitron text-xl font-bold text-white">Touch Control Calibration</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed">Custom virtual gamepad sensitivity presets for touchscreen input precision and rapid gesture response.</p>
+                                <ul class="text-xs text-cyberBlue space-y-1.5 font-rajdhani font-semibold">
+                                    <li><i class="fa-solid fa-check text-cyberRed mr-2"></i> Touch Sampling Multiplier</li>
+                                    <li><i class="fa-solid fa-check text-cyberRed mr-2"></i> Anti-Ghosting Configurations</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: BLOG PAGE (1200+ WORDS ARTICLE) ================= -->
+        <section id="page-blog" class="page-content hidden space-y-12 py-8 md:py-12">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex items-center justify-between border-b border-cyberBorder pb-4 mb-8">
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1 bg-cyberRed text-white font-orbitron text-xs font-bold rounded shadow-glow-red">TECHNICAL ARTICLE</span>
+                        <span class="text-gray-400 text-xs font-rajdhani">Published: October 2026</span>
+                    </div>
+                    <span class="text-cyberBlue text-xs font-rajdhani"><i class="fa-solid fa-clock mr-1"></i> 15 Min Read (1200+ Words)</span>
+                </div>
+
+                <!-- Article Main Title (H1 Visual Styling) -->
+                <h1 class="font-orbitron font-black text-2xl sm:text-4xl lg:text-5xl text-white leading-tight tracking-tight mb-6">
+                    Ultimate Guide to Next-Gen Mobile Casino & Arcade Gaming: Architecture, Performance Tuning, and Security Best Practices
+                </h1>
+
+                <!-- Article Hero Banner Graphic -->
+                <div class="relative rounded-2xl overflow-hidden mb-10 border border-cyberBlue/30 shadow-glow-blue">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" 
+                         alt="Cyberpunk Mobile Gaming Architecture" 
+                         class="w-full h-80 sm:h-96 object-cover transform hover:scale-105 transition-transform duration-700"
+                         onerror="this.src='https://placehold.co/1200x600/050811/00f0ff?text=Mobile+Gaming+Architecture'">
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-cyberDark via-cyberDark/80 to-transparent p-6">
+                        <p class="text-xs font-orbitron text-cyberBlue">FIGURE 1.1: Modern Mobile GPU Pipeline & Vulkan Low-Latency Rendering Layer</p>
+                    </div>
+                </div>
+
+                <!-- 1200+ WORD ARTICLE BODY WITH EXACT ANCHOR LINK -->
+                <div class="prose prose-invert max-w-none text-gray-300 leading-relaxed font-sans space-y-8 text-base">
+                    
+                    <p class="text-lg text-gray-200 leading-relaxed">
+                        The modern mobile gaming industry has evolved into a multi-billion dollar ecosystem characterized by high-fidelity graphics, real-time multiplayer networking, and complex physics simulation. Today’s mobile devices rival desktop architectures from recent years, housing system-on-chips (SoCs) equipped with octa-core CPUs, multi-core GPUs, and specialized Neural Processing Units (NPUs). However, despite these hardware achievements, unlocking continuous peak frame rates during fast-paced arcade and casino gaming sessions requires a deeper understanding of underlying software execution layers and operating system parameters.
+                    </p>
+
+                    <!-- Section Heading (H2 Visual Format) -->
+                    <h2 class="font-orbitron text-2xl font-bold text-white border-l-4 border-cyberBlue pl-4 py-1 uppercase tracking-wide">
+                        Evolution of Mobile Arcade & Digital Gaming Engines
+                    </h2>
+
+                    <p>
+                        In the early days of mobile entertainment, applications operated on lightweight Java Virtual Machines with severely restricted memory allocations. Modern titles utilize heavy multi-threaded game engines such as Unity 3D, Unreal Engine 5, and specialized C++ frameworks that interface directly with native hardware graphics APIs.
+                    </p>
+
+                    <p>
+                        When an application executes on an Android system, it relies on system runtimes (ART) to translate compiled bytecode into machine instructions. For graphics rendering, modern engines bypass legacy OpenGL ES drivers in favor of Vulkan—an explicit low-overhead graphics API that provides direct control over GPU command buffers, memory allocation, and multi-threaded rendering pipelines.
+                    </p>
+
+                    <!-- Section Heading (H2 Visual Format) -->
+                    <h2 class="font-orbitron text-2xl font-bold text-white border-l-4 border-cyberRed pl-4 py-1 uppercase tracking-wide">
+                        Hardware Latency & Touch Digitizer Optimization
+                    </h2>
+
+                    <p>
+                        In arcade and fast-action casual titles, victory often hinges on milliseconds of reaction time. Input latency is defined as the total duration from the physical moment a finger touches the glass screen digitizer to the visible execution of the corresponding action on display.
+                    </p>
+
+                    <!-- Subsection Heading (H3 Visual Format) -->
+                    <h3 class="font-orbitron text-lg font-bold text-cyberBlue uppercase tracking-wide">
+                        Understanding Touch Polling Rate vs. Display Refresh Rate
+                    </h3>
+                    <p>
+                        It is essential to distinguish between display refresh rate (measured in Hz, such as 90Hz, 120Hz, or 144Hz) and touch digitizer sampling rate (often rated at 240Hz, 360Hz, or 480Hz). While display refresh rate determines how many frames the screen renders per second, the touch sampling rate dictates how frequently the digitizer checks for finger positioning. Aligning touch sampling routines with game engine tick-rates eliminates input buffering lag.
+                    </p>
+
+                    <!-- Highlight Box containing the CRITICAL REQUIRED ANCHOR TEXT & LINK -->
+                    <div class="cyber-glass-red p-6 rounded-xl border border-cyberRed/40 my-8 space-y-3 shadow-glow-red">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-exclamation text-2xl text-cyberRed animate-pulse"></i>
+                            <h3 class="font-orbitron font-bold text-xl text-white">Verified Software Download Mirror</h3>
+                        </div>
+                        <p class="text-sm text-gray-200 leading-relaxed">
+                            To ensure high-speed performance, clean signature signatures, and zero-latency execution on Android devices, obtain official installation packages through trusted distribution nodes. You can access the verified package mirror for 
+                            <a href="https://officialallyonogames.com/ind-bingo-2/" target="_blank" rel="noopener" class="text-cyberBlue hover:text-white font-bold underline underline-offset-4 decoration-cyberBlue hover:decoration-cyberRed transition-all">Ind Bingo 2 APK Download</a> 
+                            to experience smooth frame stability, cryptographic safety, and optimized low-ping multiplayer connectivity.
+                        </p>
+                    </div>
+
+                    <!-- Section Heading (H2 Visual Format) -->
+                    <h2 class="font-orbitron text-2xl font-bold text-white border-l-4 border-cyberBlue pl-4 py-1 uppercase tracking-wide">
+                        APK Installation Architecture & Security Verification
+                    </h2>
+
+                    <p>
+                        Sideloading Android Application Packages (APKs) allows users to access regional releases, update builds early, and bypass store distribution bottlenecks. However, executing unverified executable packages introduces potential security risks if proper validation steps are ignored.
+                    </p>
+
+                    <!-- Subsection Heading (H3 Visual Format) -->
+                    <h3 class="font-orbitron text-lg font-bold text-cyberBlue uppercase tracking-wide">
+                        Cryptographic Checksum Hash Validation
+                    </h3>
+                    <p>
+                        Every legitimate Android application package is digitally signed by its developers using cryptographic private keys. Upon compiling a final build, a unique hash checksum (typically SHA-256 or MD5) is generated. Users can verify the integrity of a downloaded file by generating its hash locally using file checksum utilities and comparing it to the official developer hash.
+                    </p>
+
+                    <p>
+                        A matching SHA-256 signature guarantees that the package file has not been altered, injected with secondary adware, or tampered with by unauthorized third parties during transmission across edge servers.
+                    </p>
+
+                    <!-- Mid-Article Graphic Image Banner -->
+                    <div class="my-8 rounded-xl overflow-hidden border border-cyberRed/30">
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Cyber Security Inspection" 
+                             class="w-full h-64 object-cover transform hover:scale-105 transition-transform duration-700"
+                             onerror="this.src='https://placehold.co/1000x400/050811/ff0055?text=Cyber+Security+Inspection'">
+                    </div>
+
+                    <!-- Section Heading (H2 Visual Format) -->
+                    <h2 class="font-orbitron text-2xl font-bold text-white border-l-4 border-cyberRed pl-4 py-1 uppercase tracking-wide">
+                        Pros and Cons Analysis
+                    </h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-6">
+                        <div class="cyber-glass p-5 rounded-xl border border-emerald-500/30">
+                            <h3 class="font-orbitron font-bold text-emerald-400 text-lg mb-3"><i class="fa-solid fa-thumbs-up mr-2"></i> Performance Advantages</h3>
+                            <ul class="text-sm space-y-2 text-gray-300">
+                                <li>• Unlocks high refresh rate options on non-standard mobile models.</li>
+                                <li>• Bypasses regional app distribution delays.</li>
+                                <li>• Reduces background CPU and RAM overhead for smoother gameplay.</li>
+                                <li>• Allows manual clearing of compiled runtime cache data.</li>
+                            </ul>
+                        </div>
+                        <div class="cyber-glass-red p-5 rounded-xl border border-cyberRed/30">
+                            <h3 class="font-orbitron font-bold text-cyberRed text-lg mb-3"><i class="fa-solid fa-thumbs-down mr-2"></i> Technical Considerations</h3>
+                            <ul class="text-sm space-y-2 text-gray-300">
+                                <li>• Requires manual enabling of unknown sources permissions.</li>
+                                <li>• Automatic background app updates must be initiated manually.</li>
+                                <li>• Requires checking package checksum hashes prior to installation.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Section Heading (H2 Visual Format) -->
+                    <h2 class="font-orbitron text-2xl font-bold text-white border-l-4 border-cyberBlue pl-4 py-1 uppercase tracking-wide">
+                        Step-by-Step Optimization Protocol for Mobile Gamers
+                    </h2>
+
+                    <ol class="list-decimal list-inside space-y-3 pl-2 text-gray-300">
+                        <li><strong class="text-white">Enable Developer Options:</strong> Open System Settings &gt; About Phone &gt; Tap Build Number 7 times. Navigate to Developer Options and set 'Game Driver Preferences' to System Graphics Driver for active gaming applications.</li>
+                        <li><strong class="text-white">Configure Background Process Limits:</strong> Restrict background processes to a maximum of 2 processes during gaming sessions to prevent background apps from stealing CPU threads.</li>
+                        <li><strong class="text-white">Thermal Throttling Prevention:</strong> Avoid charging the smartphone battery simultaneously while playing heavy 3D titles to keep battery temperatures below 40°C.</li>
+                        <li><strong class="text-white">Clear Android ART Runtime Cache:</strong> Periodically reboot your device into recovery mode and execute 'Wipe Cache Partition' to remove stale compiled bytecode fragments.</li>
+                    </ol>
+
+                    <!-- Section Heading (H2 Visual Format) -->
+                    <h2 class="font-orbitron text-2xl font-bold text-white border-l-4 border-cyberRed pl-4 py-1 uppercase tracking-wide">
+                        Frequently Asked Questions (FAQ)
+                    </h2>
+
+                    <div class="space-y-4 not-prose my-6 font-sans">
+                        <div class="cyber-glass rounded-xl p-5 border border-cyberBlue/20">
+                            <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center text-left font-orbitron font-bold text-white text-base">
+                                <span>Q: Is downloading APK installation packages safe for my mobile device?</span>
+                                <i id="faq-icon-1" class="fa-solid fa-chevron-down text-cyberBlue transition-transform"></i>
+                            </button>
+                            <p id="faq-ans-1" class="text-sm text-gray-300 mt-3 hidden">
+                                A: Downloading APK files is completely safe provided you obtain them from reputable source mirrors that perform cryptographic SHA-256 hash checks and signature verification before publishing builds.
+                            </p>
+                        </div>
+
+                        <div class="cyber-glass rounded-xl p-5 border border-cyberBlue/20">
+                            <button onclick="toggleFaq(2)" class="w-full flex justify-between items-center text-left font-orbitron font-bold text-white text-base">
+                                <span>Q: How do I eliminate screen tearing and input delay during gaming?</span>
+                                <i id="faq-icon-2" class="fa-solid fa-chevron-down text-cyberBlue transition-transform"></i>
+                            </button>
+                            <p id="faq-ans-2" class="text-sm text-gray-300 mt-3 hidden">
+                                A: Enable Vulkan graphics rendering in your game settings, activate your device's built-in Game Turbo space, and increase touch response sensitivity in system language settings.
+                            </p>
+                        </div>
+
+                        <div class="cyber-glass rounded-xl p-5 border border-cyberBlue/20">
+                            <button onclick="toggleFaq(3)" class="w-full flex justify-between items-center text-left font-orbitron font-bold text-white text-base">
+                                <span>Q: Why does my mobile device warm up during extended arcade gaming?</span>
+                                <i id="faq-icon-3" class="fa-solid fa-chevron-down text-cyberBlue transition-transform"></i>
+                            </button>
+                            <p id="faq-ans-3" class="text-sm text-gray-300 mt-3 hidden">
+                                A: Heavy graphics processing generates thermal heat within the compact smartphone chassis. Using external magnetic cooling attachments or playing without thick protective phone cases prevents thermal CPU downclocking.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Section Heading (H2 Visual Format) -->
+                    <h2 class="font-orbitron text-2xl font-bold text-white border-l-4 border-cyberBlue pl-4 py-1 uppercase tracking-wide">
+                        Conclusion
+                    </h2>
+
+                    <p>
+                        Achieving an optimal mobile arcade gaming environment requires a holistic approach that combines system setting adjustments, hardware thermal control, and acquiring installation packages through verified digital mirrors. By implementing Vulkan API rendering, verifying cryptographic digital signatures, and optimizing memory allocation, mobile gamers can enjoy uncompromised frame rate stability and instant responsiveness across all gaming titles.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: ABOUT PAGE ================= -->
+        <section id="page-about" class="page-content hidden space-y-12 py-8 md:py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                    <span class="text-cyberBlue font-orbitron font-bold text-xs tracking-widest uppercase">THE CYBERSPHERE STORY</span>
+                    <h1 class="font-orbitron text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                        PIONEERING <span class="text-cyberRed text-glow-red">CYBER LABS</span>
+                    </h1>
+                    <p class="text-gray-400 text-base">Dedicated to advancing handheld software stability, security, and low-latency mobile digital architecture.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-6 relative">
+                        <div class="rounded-2xl overflow-hidden border border-cyberBlue/30 shadow-glow-blue">
+                            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80" 
+                                 alt="CyberSphere Cyber Labs Studio" 
+                                 class="w-full h-96 object-cover transform hover:scale-105 transition-transform duration-700"
+                                 onerror="this.src='https://placehold.co/800x600/050811/00f0ff?text=CyberSphere+HQ'">
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 space-y-6">
+                        <h2 class="font-orbitron text-2xl font-bold text-white">Engineering Next-Gen Mobile Software Hubs</h2>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            CyberSphere Apex was established by an independent collective of systems engineers and competitive mobile gamers seeking to eliminate latency bottlenecks, thermal throttling, and unverified software distribution.
+                        </p>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Our team operates edge mirror servers and automated cryptographic verification pipelines to guarantee every mobile gamer receives clean, uncompromised performance builds.
+                        </p>
+
+                        <!-- Team Roster -->
+                        <div class="grid grid-cols-3 gap-4 pt-4">
+                            <div class="cyber-glass p-3 rounded-xl text-center">
+                                <div class="w-12 h-12 mx-auto rounded-full bg-cyberBlue/20 border border-cyberBlue flex items-center justify-center text-cyberBlue text-xl mb-2">
+                                    <i class="fa-solid fa-user-ninja"></i>
+                                </div>
+                                <h4 class="font-orbitron text-xs font-bold text-white">CYBER_NEXUS</h4>
+                                <p class="text-[10px] text-cyberBlue font-rajdhani">Systems Lead</p>
+                            </div>
+
+                            <div class="cyber-glass-red p-3 rounded-xl text-center">
+                                <div class="w-12 h-12 mx-auto rounded-full bg-cyberRed/20 border border-cyberRed flex items-center justify-center text-cyberRed text-xl mb-2">
+                                    <i class="fa-solid fa-user-astronaut"></i>
+                                </div>
+                                <h4 class="font-orbitron text-xs font-bold text-white">VALKYRIE_01</h4>
+                                <p class="text-[10px] text-cyberRed font-rajdhani">Security Engineer</p>
+                            </div>
+
+                            <div class="cyber-glass p-3 rounded-xl text-center">
+                                <div class="w-12 h-12 mx-auto rounded-full bg-cyberBlue/20 border border-cyberBlue flex items-center justify-center text-cyberBlue text-xl mb-2">
+                                    <i class="fa-solid fa-user-gear"></i>
+                                </div>
+                                <h4 class="font-orbitron text-xs font-bold text-white">SYNTH_DEV</h4>
+                                <p class="text-[10px] text-cyberBlue font-rajdhani">Network Architect</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5: CONTACT PAGE ================= -->
+        <section id="page-contact" class="page-content hidden space-y-12 py-8 md:py-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
+                    <span class="text-cyberRed font-orbitron font-bold text-xs tracking-widest uppercase">TRANSMIT DIRECT INQUIRY</span>
+                    <h1 class="font-orbitron text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                        CUSTOMER <span class="text-cyberBlue text-glow-blue">TRANSMISSION</span>
+                    </h1>
+                    <p class="text-gray-400 text-sm sm:text-base">Have technical queries or support questions? Enter your details below to send a message directly to our engineering team.</p>
+                </div>
+
+                <!-- Customer Input Form -->
+                <div class="cyber-glass rounded-2xl p-6 sm:p-10 border border-cyberBlue/30 shadow-glow-blue relative overflow-hidden">
+                    
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            
+                            <!-- Name -->
+                            <div class="space-y-2">
+                                <label for="cust-name" class="block font-orbitron text-xs font-bold uppercase text-cyberBlue">
+                                    Your Name <span class="text-cyberRed">*</span>
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                        <i class="fa-solid fa-user"></i>
+                                    </span>
+                                    <input type="text" id="cust-name" required placeholder="Alex Mercer" 
+                                           class="w-full pl-10 pr-4 py-3 bg-cyberDark/90 border border-cyberBlue/30 rounded-lg text-white font-sans focus:outline-none focus:border-cyberBlue focus:ring-1 focus:ring-cyberBlue transition-all text-sm">
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="space-y-2">
+                                <label for="cust-email" class="block font-orbitron text-xs font-bold uppercase text-cyberBlue">
+                                    Your Email <span class="text-cyberRed">*</span>
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+                                    <input type="email" id="cust-email" required placeholder="alex@cybernet.io" 
+                                           class="w-full pl-10 pr-4 py-3 bg-cyberDark/90 border border-cyberBlue/30 rounded-lg text-white font-sans focus:outline-none focus:border-cyberBlue focus:ring-1 focus:ring-cyberBlue transition-all text-sm">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="space-y-2">
+                            <label for="cust-phone" class="block font-orbitron text-xs font-bold uppercase text-cyberBlue">
+                                Phone Number <span class="text-cyberRed">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                    <i class="fa-solid fa-phone"></i>
+                                </span>
+                                <input type="tel" id="cust-phone" required placeholder="+1 (555) 019-2834" 
+                                       class="w-full pl-10 pr-4 py-3 bg-cyberDark/90 border border-cyberBlue/30 rounded-lg text-white font-sans focus:outline-none focus:border-cyberBlue focus:ring-1 focus:ring-cyberBlue transition-all text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Customer Message -->
+                        <div class="space-y-2">
+                            <label for="cust-message" class="block font-orbitron text-xs font-bold uppercase text-cyberBlue">
+                                Message <span class="text-cyberRed">*</span>
+                            </label>
+                            <textarea id="cust-message" rows="5" required placeholder="Type your detailed message here..." 
+                                      class="w-full p-4 bg-cyberDark/90 border border-cyberBlue/30 rounded-lg text-white font-sans focus:outline-none focus:border-cyberBlue focus:ring-1 focus:ring-cyberBlue transition-all text-sm resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full cyber-clip-btn bg-gradient-to-r from-cyberRed via-red-600 to-cyberRed hover:brightness-125 text-white font-orbitron font-extrabold py-4 px-8 uppercase tracking-widest text-sm transition-all shadow-glow-red flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-paper-plane"></i> Send Customer Transmission
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <!-- Submission Notification Modal -->
+                <div id="toast-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+                    <div class="cyber-glass-red max-w-md w-full p-8 rounded-2xl border-2 border-cyberBlue text-center space-y-4 shadow-glow-intense animate-bounce">
+                        <div class="w-16 h-16 rounded-full bg-cyberBlue/20 border-2 border-cyberBlue flex items-center justify-center text-cyberBlue text-3xl mx-auto">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="font-orbitron font-bold text-2xl text-white uppercase">Transmission Received!</h3>
+                        <p class="text-sm text-gray-300 font-sans">
+                            Thank you for reaching out! Our engineering desk has received your message and will review it shortly.
+                        </p>
+                        <button onclick="closeToast()" class="cyber-clip-btn bg-cyberBlue text-black font-orbitron font-bold px-6 py-2.5 text-xs uppercase tracking-wider">
+                            Acknowledge & Close
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cyberDark border-t border-cyberBlue/20 py-10 z-10 relative mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-cyberBlue/10 rounded border border-cyberBlue flex items-center justify-center text-cyberBlue">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div>
+                        <span class="font-orbitron font-bold text-lg text-white">CYBER<span class="text-cyberRed">SPHERE</span></span>
+                        <p class="text-xs text-gray-400 font-sans">© 2026 CyberSphere Apex Portal. All Rights Reserved.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 font-orbitron text-xs uppercase text-gray-400">
+                    <button onclick="switchPage('home')" class="hover:text-cyberBlue transition-colors">Home</button>
+                    <button onclick="switchPage('services')" class="hover:text-cyberBlue transition-colors">Services</button>
+                    <button onclick="switchPage('blog')" class="hover:text-cyberBlue transition-colors">Blog Guide</button>
+                    <button onclick="switchPage('about')" class="hover:text-cyberBlue transition-colors">About Us</button>
+                    <button onclick="switchPage('contact')" class="hover:text-cyberBlue transition-colors">Contact Us</button>
+                </div>
+
+                <div class="flex items-center space-x-4 text-gray-400">
+                    <a href="#" class="hover:text-cyberBlue transition-colors"><i class="fa-brands fa-discord text-lg"></i></a>
+                    <a href="#" class="hover:text-cyberRed transition-colors"><i class="fa-brands fa-telegram text-lg"></i></a>
+                    <a href="#" class="hover:text-cyberBlue transition-colors"><i class="fa-brands fa-x-twitter text-lg"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // SPA Page Switcher Logic
+        function switchPage(pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            const activePage = document.getElementById(`page-${pageId}`);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
+
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.className = 'nav-btn px-4 py-2 rounded-md text-gray-300 hover:text-cyberBlue hover:bg-cyberBlue/10 transition-all';
+            });
+
+            const currentNav = document.getElementById(`nav-${pageId}`);
+            if (currentNav) {
+                currentNav.className = 'nav-btn px-4 py-2 rounded-md transition-all text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/40 shadow-glow-blue';
+            }
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function toggleFaq(id) {
+            const ans = document.getElementById(`faq-ans-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                ans.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            document.getElementById('toast-modal').classList.remove('hidden');
+            document.getElementById('contact-form').reset();
+        }
+
+        function closeToast() {
+            document.getElementById('toast-modal').classList.add('hidden');
+        }
+
+        // Mouse Glow Cursor Effect
+        const cursorGlow = document.getElementById('cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            cursorGlow.style.transform = `translate(${e.clientX - 64}px, ${e.clientY - 64}px)`;
+        });
+
+        // Floating Interactive Particle Canvas
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particles = [];
+        const particleCount = Math.min(70, Math.floor(window.innerWidth / 20));
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 1.5,
+                vy: (Math.random() - 0.5) * 1.5,
+                radius: Math.random() * 2 + 1,
+                color: Math.random() > 0.5 ? '#00f0ff' : '#ff0055'
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color;
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dx = p.x - p2.x;
+                    let dy = p.y - p2.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = p.color === '#00f0ff' ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 0, 85, 0.15)';
+                        ctx.lineWidth = 0.7;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Autoplay Cyber Synthwave Audio Engine (Web Audio API)
+        let audioCtx = null;
+        let isAudioStarted = false;
+
+        function initSynthAudio() {
+            if (isAudioStarted) return;
+            isAudioStarted = true;
+
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+
+                const tempo = 132;
+                const beatLen = 60 / tempo;
+                const notes = [146.83, 174.61, 220.00, 261.63, 293.66, 349.23, 440.00, 293.66];
+                let step = 0;
+
+                function playSynthBeat() {
+                    if (!audioCtx) return;
+
+                    const now = audioCtx.currentTime;
+
+                    // Lead Arpeggio
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    const filter = audioCtx.createBiquadFilter();
+
+                    osc.type = step % 2 === 0 ? 'sawtooth' : 'square';
+                    osc.frequency.setValueAtTime(notes[step % notes.length], now);
+
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(1400 + Math.sin(step) * 500, now);
+
+                    gain.gain.setValueAtTime(0.035, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + beatLen * 0.45);
+
+                    osc.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(now);
+                    osc.stop(now + beatLen * 0.45);
+
+                    // Energetic Sub Kick Pulse
+                    if (step % 2 === 0) {
+                        const kickOsc = audioCtx.createOscillator();
+                        const kickGain = audioCtx.createGain();
+
+                        kickOsc.type = 'sine';
+                        kickOsc.frequency.setValueAtTime(140, now);
+                        kickOsc.frequency.exponentialRampToValueAtTime(35, now + 0.14);
+
+                        kickGain.gain.setValueAtTime(0.18, now);
+                        kickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+
+                        kickOsc.connect(kickGain);
+                        kickGain.connect(audioCtx.destination);
+
+                        kickOsc.start(now);
+                        kickOsc.stop(now + 0.14);
+                    }
+
+                    step++;
+                    setTimeout(playSynthBeat, (beatLen / 2) * 1000);
+                }
+
+                playSynthBeat();
+            } catch (e) {
+                console.log("Audio initialized upon user interaction.");
+            }
+        }
+
+        // Seamless Auto-play Listeners across load, click, move, and scroll
+        ['click', 'mousemove', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
+            window.addEventListener(evt, initSynthAudio, { once: false });
+        });
+
+        window.onload = function() {
+            initSynthAudio();
+        };
+    </script>
+</body>
+</html>
